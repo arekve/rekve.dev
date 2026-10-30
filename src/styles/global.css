@@ -1,0 +1,61 @@
+:root {
+	--paper: #eef0ee;
+	--ink: #172126;
+	--muted: #56636a;
+	--rule: #c5cccb;
+	--employer-savvy: #2d5b73;
+	--employer-bouvet: #c99a2e;
+	--employer-powerzeek: #8c2f25;
+	--font: 'Schibsted Grotesk Variable', system-ui, sans-serif;
+	color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	background: var(--paper);
+	color: var(--ink);
+	font-family: var(--font);
+	font-size: 100%;
+	-webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	html {
+		scroll-behavior: smooth;
+	}
+}
+
+body {
+	margin: 0;
+	font-size: 1.0625rem;
+	line-height: 1.55;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul {
+	margin: 0;
+}
+
+a {
+	color: inherit;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.2em;
+}
+
+a:hover {
+	text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+	outline: 2px solid var(--ink);
+	outline-offset: 2px;
+}

@@ -1,0 +1,181 @@
+---
+import { type Employer, formatPeriod, monthIndex } from '../data/cv';
+
+interface Props {
+	employers: Employer[];
+	now: Date;
+}
+
+const { employers, now } = Astro.props;
+
+const start = Math.min(...employers.map((employer) => monthIndex(employer.start)));
+const end = now.getUTCFullYear() * 12 + now.getUTCMonth() + 1;
+const span = end - start;
+
+// End months are treated as exclusive so back-to-back periods don't overlap
+const position = (from: string, to?: string) => {
+	const x = monthIndex(from) - start;
+	const w = (to ? monthIndex(to) : end) - start - x;
+	return `--x: ${(x / span) * 100}%; --w: ${(w / span) * 100}%;`;
+};
+
+const projects = employers
+	.flatMap((employer) => employer.projects.map((project) => ({ ...project, employer: employer.id })))
+	.sort((a, b) => monthIndex(a.start) - monthIndex(b.start));
+
+const years: number[] = [];
+for (let year = Math.ceil(start / 12); year * 12 < end; year++) years.push(year);
+---
+
+<div class="timeline">
+	<div class="row employers" aria-hidden="true">
+		{
+			employers.map((employer) => (
+				<span class="employer" data-employer={employer.id} style={position(employer.start, employer.end)}>
+					{employer.name}
+				</span>
+			))
+		}
+	</div>
+
+	<ol class="row projects" aria-label="Projects by date">
+		{
+			projects.map((project, i) => (
+				<li data-employer={project.employer} style={`${position(project.start, project.end)} --i: ${i};`}>
+					<a href={`#${project.id}`} aria-label={`${project.client}, ${formatPeriod(project)}`}>
+						<span class="label" aria-hidden="true">
+							{project.client}
+						</span>
+					</a>
+				</li>
+			))
+		}
+	</ol>
+
+	<div class="row ruler" aria-hidden="true">
+		{
+			years.map((year) => (
+				<span class:list={{ odd: year % 2 === 1 }} style={`--x: ${((year * 12 - start) / span) * 100}%;`}>
+					{year}
+				</span>
+			))
+		}
+	</div>
+</div>
+
+<style>
+	.timeline {
+		display: grid;
+		gap: 0.5rem;
+	}
+
+	.row {
+		position: relative;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.row > * {
+		position: absolute;
+		left: var(--x);
+		width: var(--w);
+	}
+
+	[data-employer='savvy'] {
+		--c: var(--employer-savvy);
+		--on-c: var(--paper);
+	}
+	[data-employer='bouvet'] {
+		--c: var(--employer-bouvet);
+		--on-c: var(--ink);
+	}
+	[data-employer='powerzeek'] {
+		--c: var(--employer-powerzeek);
+		--on-c: var(--paper);
+	}
+
+	.employers {
+		height: 1.75rem;
+	}
+
+	.employer {
+		border-top: 3px solid var(--c);
+		padding-top: 0.3rem;
+		font-size: 0.8125rem;
+		font-weight: 600;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+
+	.projects {
+		height: 3rem;
+	}
+
+	.projects li {
+		height: 100%;
+		padding-right: 2px;
+		container-type: inline-size;
+	}
+
+	.projects a {
+		display: flex;
+		align-items: flex-end;
+		height: 100%;
+		padding: 0.4rem 0.5rem;
+		background: var(--c);
+		color: var(--on-c);
+		font-size: 0.875rem;
+		font-weight: 600;
+		text-decoration: none;
+		white-space: nowrap;
+		overflow: hidden;
+		animation: reveal 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+		animation-delay: calc(150ms + var(--i) * 80ms);
+	}
+
+	.projects a:hover {
+		background: color-mix(in oklab, var(--c), var(--ink) 18%);
+	}
+
+	@container (width < 4.5rem) {
+		.label {
+			display: none;
+		}
+	}
+
+	@keyframes reveal {
+		from {
+			clip-path: inset(0 100% 0 0);
+		}
+		to {
+			clip-path: inset(0);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.projects a {
+			animation: none;
+		}
+	}
+
+	.ruler {
+		height: 1.5rem;
+	}
+
+	.ruler span {
+		width: auto;
+		padding-left: 0.3rem;
+		border-left: 1px solid var(--rule);
+		color: var(--muted);
+		font-size: 0.75rem;
+		font-variant-numeric: tabular-nums;
+		line-height: 1.5rem;
+	}
+
+	@media (width < 40rem) {
+		.ruler .odd {
+			display: none;
+		}
+	}
+</style>
