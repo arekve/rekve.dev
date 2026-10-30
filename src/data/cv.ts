@@ -38,11 +38,11 @@ export const employers: Employer[] = [
 		projects: [
 			{
 				client: 'DNB',
-				name: { nn: 'Digital selskapsetablering', en: 'Digital company setup' },
+				name: { nn: 'Digital selskapsetablering', en: 'Corporate customer onboarding' },
 				start: '2023-04',
 				description: {
-					nn: 'Éin stad for alt nye bedriftskundar treng, der DNB etablerer selskapet i Brønnøysund for deg. Me byggjer heile flyten på nytt frå grunnen av.',
-					en: 'A one-stop shop for new business customers, where DNB registers the company in Brønnøysund for you. We’re rebuilding the whole flow from scratch.',
+					nn: 'Éin stad for alt nye bedriftskundar treng, der DNB etablerer selskapet i Brønnøysund for deg. Me har bygd heile flyten frå grunnen av.',
+					en: 'A one-stop shop for new business customers, where DNB registers the company in Brønnøysund for you. We have built the whole flow from scratch.',
 				},
 			},
 			{
