@@ -1,13 +1,10 @@
 :root {
-	--paper: #eef0ee;
-	--ink: #172126;
-	--muted: #56636a;
-	--rule: #c5cccb;
-	--employer-savvy: #2d5b73;
-	--employer-bouvet: #c99a2e;
-	--employer-powerzeek: #8c2f25;
+	--bg: #152027;
+	--fg: #e4e9e7;
+	--muted: #8d9ba1;
+	--rule: #2f3d44;
 	--font: 'Schibsted Grotesk Variable', system-ui, sans-serif;
-	color-scheme: light;
+	color-scheme: dark;
 }
 
 *,
@@ -17,17 +14,13 @@
 }
 
 html {
-	background: var(--paper);
-	color: var(--ink);
+	background: var(--bg);
+	color: var(--fg);
 	font-family: var(--font);
 	font-size: 100%;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 	-webkit-text-size-adjust: 100%;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-	html {
-		scroll-behavior: smooth;
-	}
 }
 
 body {
@@ -56,6 +49,6 @@ a:hover {
 }
 
 :focus-visible {
-	outline: 2px solid var(--ink);
+	outline: 2px solid var(--fg);
 	outline-offset: 2px;
 }
