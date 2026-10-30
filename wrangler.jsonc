@@ -1,0 +1,15 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "rekve-dev",
+	"compatibility_date": "2026-10-30",
+	// Static-only site: no Worker script, Astro's build output is served as assets
+	"assets": {
+		"directory": "./dist"
+	},
+	"routes": [
+		{
+			"pattern": "rekve.dev",
+			"custom_domain": true
+		}
+	]
+}
