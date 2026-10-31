@@ -15,24 +15,33 @@ export interface Project extends Period {
 
 export interface Employer extends Period {
 	name: string;
+	url?: string;
 	role: Localized;
 	projects: Project[];
 }
 
 export const profile = {
 	name: 'Asbjørn Rekve',
+	givenName: 'Asbjørn',
+	familyName: 'Rekve',
+	city: 'Bergen',
+	country: 'NO',
 	email: 'asbjorn@rekve.dev',
 	github: 'https://github.com/arekve',
+	linkedin: 'https://www.linkedin.com/in/arekve',
 	careerStart: '2016-08',
+	school: 'Høgskolen i Bergen',
 	education: {
 		nn: 'Bachelor i informasjonsteknologi, Høgskolen i Bergen',
 		en: 'Bachelor in Information Technology, Høgskolen i Bergen',
 	} satisfies Localized,
+	skills: ['TypeScript', 'React', 'Kotlin', 'Node.js', '.NET', 'C#', 'AWS', 'Azure', 'Nx'],
 };
 
 export const employers: Employer[] = [
 	{
 		name: 'Savvy',
+		url: 'https://savvy.no',
 		role: { nn: 'Seniorkonsulent', en: 'Senior consultant' },
 		start: '2022-08',
 		projects: [

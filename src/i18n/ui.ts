@@ -5,8 +5,11 @@ export type Localized = Record<Locale, string>;
 const en = {
 	/** BCP 47 tag for the html lang attribute */
 	htmlLang: 'en',
+	/** Open Graph locale */
+	ogLocale: 'en_US',
 	languageName: 'English',
 	title: 'fullstack developer',
+	jobTitle: 'Fullstack developer',
 	description: (years: number) =>
 		`Asbjørn Rekve is a fullstack developer in Bergen with ${years} years of experience in TypeScript, React, Kotlin and .NET.`,
 	lede: 'Fullstack developer in Bergen. Senior consultant at Savvy, currently working with DNB.',
@@ -17,13 +20,17 @@ const en = {
 	contact: 'Contact',
 	writeTo: 'Write to me at',
 	findMeOn: 'or find me on',
+	and: 'and',
 	now: 'now',
+	ogImageAlt: 'The name Asbjørn Rekve on a dark background',
 };
 
 const nn: typeof en = {
 	htmlLang: 'nn',
+	ogLocale: 'nn_NO',
 	languageName: 'Norsk',
 	title: 'fullstackutviklar',
+	jobTitle: 'Fullstackutviklar',
 	description: (years) =>
 		`Asbjørn Rekve er fullstackutviklar i Bergen med ${years} års erfaring med TypeScript, React, Kotlin og .NET.`,
 	lede: 'Fullstackutviklar i Bergen. Seniorkonsulent i Savvy, no hos DNB.',
@@ -34,7 +41,9 @@ const nn: typeof en = {
 	contact: 'Kontakt',
 	writeTo: 'Skriv til meg på',
 	findMeOn: 'eller finn meg på',
+	and: 'og',
 	now: 'no',
+	ogImageAlt: 'Namnet Asbjørn Rekve på mørk bakgrunn',
 };
 
 export const ui: Record<Locale, typeof en> = { nn, en };

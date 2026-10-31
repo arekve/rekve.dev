@@ -1,0 +1,66 @@
+---
+import { getAbsoluteLocaleUrl } from 'astro:i18n';
+import { employers, profile } from '../data/cv';
+import { type Locale, locales, ui } from '../i18n/ui';
+
+interface Props {
+	lang: Locale;
+	title: string;
+	description: string;
+}
+
+const { lang, title, description } = Astro.props;
+const t = ui[lang];
+const canonical = getAbsoluteLocaleUrl(lang);
+const ogImage = new URL('/og.png', Astro.site).href;
+const employer = employers.find((e) => !e.end);
+
+// One Person entity shared by both language versions, so search engines and AI
+// assistants can tie this site, GitHub and LinkedIn to the same person
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'ProfilePage',
+	'@id': canonical,
+	url: canonical,
+	name: title,
+	inLanguage: t.htmlLang,
+	dateModified: new Date().toISOString(),
+	mainEntity: {
+		'@type': 'Person',
+		'@id': new URL('/#person', Astro.site).href,
+		name: profile.name,
+		givenName: profile.givenName,
+		familyName: profile.familyName,
+		url: new URL('/', Astro.site).href,
+		email: `mailto:${profile.email}`,
+		jobTitle: t.jobTitle,
+		worksFor: employer && { '@type': 'Organization', name: employer.name, url: employer.url },
+		address: { '@type': 'PostalAddress', addressLocality: profile.city, addressCountry: profile.country },
+		alumniOf: { '@type': 'CollegeOrUniversity', name: profile.school },
+		knowsAbout: profile.skills,
+		sameAs: [profile.github, profile.linkedin],
+	},
+};
+---
+
+<link rel="canonical" href={canonical} />
+{locales.map((locale) => <link rel="alternate" hreflang={ui[locale].htmlLang} href={getAbsoluteLocaleUrl(locale)} />)}
+<link rel="alternate" hreflang="x-default" href={getAbsoluteLocaleUrl('en')} />
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<meta property="og:type" content="profile" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:site_name" content={profile.name} />
+<meta property="og:locale" content={t.ogLocale} />
+{locales.filter((locale) => locale !== lang).map((locale) => <meta property="og:locale:alternate" content={ui[locale].ogLocale} />)}
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={t.ogImageAlt} />
+<meta property="profile:first_name" content={profile.givenName} />
+<meta property="profile:last_name" content={profile.familyName} />
+<meta name="twitter:card" content="summary_large_image" />
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData).replace(/</g, '\\u003c')} />
