@@ -28,7 +28,7 @@ const nn: typeof en = {
 		`Asbjørn Rekve er fullstackutviklar i Bergen med ${years} års erfaring med TypeScript, React, Kotlin og .NET.`,
 	lede: 'Fullstackutviklar i Bergen. Seniorkonsulent i Savvy, no hos DNB.',
 	about: (years) =>
-		`Eg har bygd webapplikasjonar i ${years} år, mest i TypeScript og React, med Kotlin, C# eller Node på serveren og AWS eller Azure i botnen. Eg likar å følgje ein funksjon heile vegen frå datamodell til ferdig grensesnitt, og å jobbe tett med designarar for å få det rett.`,
+		`Eg har bygd webapplikasjonar i ${years} år, mest i TypeScript og React, med Kotlin, C# eller Node på serveren og AWS eller Azure i botnen. Eg likar å følgje ein feature heile vegen frå datamodell til ferdig grensesnitt, og å jobbe tett med designarar for å få det rett.`,
 	work: 'Erfaring',
 	education: 'Utdanning',
 	contact: 'Kontakt',
