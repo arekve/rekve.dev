@@ -24,7 +24,6 @@ export const profile = {
 	name: 'Asbjørn Rekve',
 	givenName: 'Asbjørn',
 	familyName: 'Rekve',
-	city: 'Bergen',
 	country: 'NO',
 	email: 'asbjorn@rekve.dev',
 	github: 'https://github.com/arekve',

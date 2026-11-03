@@ -35,7 +35,7 @@ const structuredData = {
 		email: `mailto:${profile.email}`,
 		jobTitle: t.jobTitle,
 		worksFor: employer && { '@type': 'Organization', name: employer.name, url: employer.url },
-		address: { '@type': 'PostalAddress', addressLocality: profile.city, addressCountry: profile.country },
+		address: { '@type': 'PostalAddress', addressCountry: profile.country },
 		alumniOf: { '@type': 'CollegeOrUniversity', name: profile.school },
 		knowsAbout: profile.skills,
 		sameAs: [profile.github, profile.linkedin],
