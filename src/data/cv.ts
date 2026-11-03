@@ -29,11 +29,6 @@ export const profile = {
 	github: 'https://github.com/arekve',
 	linkedin: 'https://www.linkedin.com/in/arekve',
 	careerStart: '2016-08',
-	school: 'Høgskolen i Bergen',
-	education: {
-		nn: 'Bachelor i informasjonsteknologi, Høgskolen i Bergen',
-		en: 'Bachelor in Information Technology, Høgskolen i Bergen',
-	} satisfies Localized,
 	skills: ['TypeScript', 'React', 'Kotlin', 'Node.js', '.NET', 'C#', 'AWS', 'Azure', 'Nx'],
 };
 
